@@ -1,0 +1,25 @@
+{
+    "name": "squirrel-io",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "nodemon index.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.6.9",
+        "ejs": "~2.5.7",
+        "esm": "^3.2.22",
+        "express": "~4.16.0",
+        "express-ejs-layouts": "^2.5.0",
+        "express-fileupload": "^1.1.4",
+        "express-validator": "^5.3.1",
+        "http-errors": "~1.6.2",
+        "lodash": "^4.17.11",
+        "mongoose": "^5.5.5",
+        "mongoose-paginate-v2": "^1.2.0",
+        "morgan": "~1.9.0",
+        "socket.io": "^2.2.0"
+    }
+}

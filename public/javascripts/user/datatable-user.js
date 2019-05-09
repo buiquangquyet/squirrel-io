@@ -92,4 +92,8 @@ socket.on('push-notify', function (msg) {
     console.log(msg);
 });
 
+socket.on('newclientconnect', function (data) {
+    console.log(data);
+});
+
 socket.on('disconnect', function () { });

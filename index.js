@@ -20,12 +20,12 @@ var msg = {
 }
 io.on('connection', function (socket) {
     console.log('an user connected');
-    socket.emit('push-notify', 'connection');
+    socket.emit('push-notify', 'push-notify :connection');
+    socket.emit('newclientconnect', { description:' clients connected!' })
     socket.on('disconnect', function () {
         console.log('user disconnected');
     });
 });
-io.emit('push-notify', msg);
 
 
 // view engine setup

@@ -3,7 +3,6 @@ $(document).ready(function () {
     Showdata();
 });
 
-
 function Showdata() {
     $('#example').DataTable({
         ajax: "data/orthogonal.txt",

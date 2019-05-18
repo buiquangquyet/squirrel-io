@@ -8,6 +8,7 @@
     "dependencies": {
         "body-parser": "^1.19.0",
         "cookie-parser": "~1.4.3",
+        "datetimepicker": "^0.1.39",
         "debug": "~2.6.9",
         "ejs": "~2.5.7",
         "esm": "^3.2.22",

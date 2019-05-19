@@ -1,6 +1,8 @@
 $(document).ready(function () {
     Showdata();
-    $("#dtBox").DateTimePicker();
+    $("#dtBox").DateTimePicker({
+        titleContentDateTime:'Lựa chọn thời gian',
+    });
 });
 
 
@@ -35,5 +37,24 @@ function Showdata() {
                 .html('<button type="button" id="any_button" class="btn btn-success" data-toggle="modal" data-target="#addModal"> add </button>');
         }
             
+    });
+}
+
+function SaveTodo(){
+    console.log('SaveTodo');
+    var form = $("#todoform");
+    var formData = new FormData(form[0]);
+    console.log(formData);
+    $.ajax({
+        url: '/todo/save',
+        type: 'POST',
+        data: formData,
+        success: function (data) {
+            console.log(data);
+            $('#addModal').modal('hide');
+        },
+        cache: false,
+        contentType: false,
+        processData: false
     });
 }

@@ -16,6 +16,8 @@ app.use(expressLayouts);
 app.set('layout', 'layout/master');
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(fileUpload());
+
 
 app.get('/', function (req, res, next) {
     var data = {
@@ -23,5 +25,59 @@ app.get('/', function (req, res, next) {
     };
     res.render('Todo/IndexView', data);
 });
+
+app.get('/getlist',function(req,res,next){
+
+});
+
+app.post('/save',function(req, res){
+    console.log('--------------------------');
+    if (Object.keys(req.files).length == 0) {
+        return res.status(400).send('No files were uploaded.');
+    }
+    // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+    
+    console.log(req);
+    let sampleFile = req.files.image;
+    
+    var crypto = require("crypto");
+    var random_name = crypto.randomBytes(10).toString('hex');
+    console.log('random_name' + random_name);
+
+    let pathnametoshow = '/media/' + random_name + '.jpg';
+    let pathnametoupload = 'public/media/' + random_name + '.jpg';
+    console.log('pathnametoupload' + pathnametoupload);
+    sampleFile.mv(pathnametoupload, function (err) {
+        if (err)
+            return res.status(500).send(err);
+        console.log('pathnametoshow:' + pathnametoshow);
+        //res.send('File uploaded! :' + name);
+    });
+
+    
+    var todo = {
+        title: req.body.title,
+        datetime: req.body.datetime,
+        value: req.body.value_txt,
+        image: pathnametoshow,
+        update_at: new Date().toLocaleString(),
+    }
+
+    var newtodo = new Todos(todo);
+    newtodo.save().then(() => console.log('add success'));
+    console.log(newtodo)
+    
+
+    var data = {
+        message: 'Success',
+        code: 200,
+        data: {
+            todo: todo,
+        }
+    }
+
+    return res.status(200).json(data);
+
+})
 
 module.exports = app;

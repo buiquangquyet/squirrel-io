@@ -26,6 +26,11 @@ app.get('/', function (req, res, next) {
     res.render('User/IndexView', data);
 });
 
+app.get('/getlist',function(req,res,next){
+    var userMap = {};
+
+});
+
 app.post('/save', [
     // email must be an email
     check('email').isEmail(),
@@ -43,20 +48,20 @@ app.post('/save', [
     }
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
     
-    console.log(req);
+    //console.log(req);
     let sampleFile = req.files.image;
     
     var crypto = require("crypto");
     var random_name = crypto.randomBytes(10).toString('hex');
-    console.log('random_name' + random_name);
+    //console.log('random_name' + random_name);
 
     let pathnametoshow = '/media/' + random_name + '.jpg';
     let pathnametoupload = 'public/media/' + random_name + '.jpg';
-    console.log('pathnametoupload' + pathnametoupload);
+    //console.log('pathnametoupload' + pathnametoupload);
     sampleFile.mv(pathnametoupload, function (err) {
         if (err)
             return res.status(500).send(err);
-        console.log('pathnametoshow:' + pathnametoshow);
+        //console.log('pathnametoshow:' + pathnametoshow);
         //res.send('File uploaded! :' + name);
     });
     var newuser = {
@@ -71,13 +76,13 @@ app.post('/save', [
 
     var user = new UserModel(newuser);
 
-    var newUserdata = UserModel.findOne({ lastname: "quyetbq" }, function (err, adventure) {
-        console.log(adventure);
-    });
+    // var newUserdata = UserModel.findOne({ lastname: "quyetbq" }, function (err, adventure) {
+    //     console.log(adventure);
+    // });
 
-    console.log('newUserdata2');
-    var newUserdata2 = UserModel.findUserByEmail('buiquangquyet@gmail.com');
-    console.log(newUserdata2);
+    // console.log('newUserdata2');
+    // var newUserdata2 = UserModel.findUserByEmail('buiquangquyet@gmail.com');
+    // console.log(newUserdata2);
     user.save().then(() => console.log('add success'));
     var data = {
         message: 'Success',

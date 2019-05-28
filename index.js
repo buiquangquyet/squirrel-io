@@ -6,6 +6,7 @@ var io = require('socket.io')(http);
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var config = require('./config');
 var userRouter = require('./routes/UserController');
 var todoRouter = require('./routes/TodoController');
 var path = require('path');
@@ -27,7 +28,8 @@ io.on('connection', function (socket) {
         console.log('user disconnected');
     });
 });
-
+console.log(config.getDbConnectionString());
+mongoose.connect(config.getDbConnectionString());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

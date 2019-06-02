@@ -13,7 +13,8 @@ var path = require('path');
 
 
 app.get('/', function (req, res) {
-    res.send('<h1>Hello world</h1>');
+    res.redirect('/todo');
+    //res.send('<h1>Hello world</h1>');
 });
 
 var msg = {

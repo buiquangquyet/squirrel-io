@@ -28,18 +28,27 @@ app.get('/', function (req, res, next) {
 
 app.get('/getlist',function(req,res,next){
 
+    var listTodo; 
+    Todos.find({}, function(err, todos) {
+        listTodo = todos;
+        var data = {
+            message: 'Success',
+            code: 200,
+            data: listTodo
+        }
+        return res.status(200).json(data);    
+     });
+
+    
 });
 
 app.post('/save',function(req, res){
-    console.log('--------------------------');
-    if (Object.keys(req.files).length == 0) {
-        return res.status(400).send('No files were uploaded.');
-    }
+    
+    // if (Object.keys(req.files).length == 0) {
+    //     return res.status(400).send('No files were uploaded.');
+    // }
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    
-    console.log(req);
     let sampleFile = req.files.image;
-    
     var crypto = require("crypto");
     var random_name = crypto.randomBytes(10).toString('hex');
     console.log('random_name' + random_name);
@@ -53,6 +62,9 @@ app.post('/save',function(req, res){
         console.log('pathnametoshow:' + pathnametoshow);
         //res.send('File uploaded! :' + name);
     });
+    
+
+    
 
     
     var todo = {
@@ -60,7 +72,7 @@ app.post('/save',function(req, res){
         datetime: req.body.datetime,
         value: req.body.value_txt,
         image: pathnametoshow,
-        update_at: new Date().toLocaleString(),
+        create_time: new Date().toLocaleString()
     }
 
     var newtodo = new Todos(todo);
@@ -79,5 +91,4 @@ app.post('/save',function(req, res){
     return res.status(200).json(data);
 
 })
-
 module.exports = app;

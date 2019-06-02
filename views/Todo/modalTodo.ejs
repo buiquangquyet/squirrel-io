@@ -27,8 +27,8 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">title:</label>
                                 <div class="col-lg-12">
-                                    <input class="form-control" type="hidden" name="_id" value="1">
-                                    <input class="form-control" type="text" name="title" value="Jane">
+                                    <input class="form-control" type="hidden" name="_id" value="">
+                                    <input class="form-control" type="text" name="title" value="" placeholder="bé ăn hay uống thứ gì...">
                                 </div>
                             </div>
                             
@@ -44,7 +44,7 @@
                                 <div class="text-center">
                                     <!-- <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                                     <h6>Upload a different photo...</h6> -->
-                                    <input type="file" id="file-image" class="form-control" name='image'>
+                                    <input type="file" id="file-image-todo" onchange="changeImage()" class="form-control" name='image'>
                                 </div>
                             </div>
 
@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">value:</label>
                                 <div class="col-lg-12">
-                                    <input class="form-control" type="text" name="value_txt" value="Bishop">
+                                    <input class="form-control" type="text" name="value_txt" value="" placeholder="60ml">
                                 </div>
                             </div>
                         </form>

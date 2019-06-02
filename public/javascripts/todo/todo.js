@@ -3,6 +3,12 @@ $(document).ready(function () {
     $("#dtBox").DateTimePicker({
         titleContentDateTime:'Lựa chọn thời gian',
     });
+
+
+    $("#file-image-todo").change(function() {
+        console.log($(this).val());
+    });
+
 });
 
 
@@ -12,23 +18,21 @@ function ShowModal(name){
 
 function Showdata() {
     $('#example').DataTable({
-        ajax: "data/orthogonal.txt",
+        ajax: "/todo/getlist",
         columns: [
-            { data: "name" },
-            { data: "position" },
-            { data: "office" },
-            { data: "extn" },
-            {
-                data: {
-                    _: "start_date.display",
-                    sort: "start_date.timestamp"
-                }
-            },
-            { data: "salary" },
+            { data: "title" },
+            { data: "value" },
+            
             {
                 data: null,
                 "bSortable": false,
-                "mRender": function (o) { return '<button type="button" class="btn btn-warning" onclick="ShowModal(\'' + o.name + '\')">' + 'Edit' + '</button> <button type="button" class="btn btn-danger" onclick="ShowModalDel(\'' + o.name + '\')">' + 'Del' + '</button>'; }
+                "mRender": function (o) { return '<img style="width:100px" src=\''+o.image+'\'>'; }
+            },
+            { data: "datetime" },
+            {
+                data: null,
+                "bSortable": false,
+                "mRender": function (o) { return '<button type="button" class="btn btn-warning" onclick="ShowModal(\'' + o._id + '\')">' + 'Edit' + '</button> <button type="button" class="btn btn-danger" onclick="ShowModalDel(\'' + o._id + '\')">' + 'Del' + '</button>'; }
             }
         ], 
         dom: 'l<"toolbar">frtip',

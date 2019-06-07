@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 var userRouter = require('./routes/UserController');
 var todoRouter = require('./routes/TodoController');
+var uploadRouter = require('./routes/UploadController');
 var path = require('path');
 
 
@@ -44,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', userRouter);
 app.use('/todo', todoRouter);
+app.use('/upload', uploadRouter);
 
 http.listen(3002, function () {
     console.log('listening on *:3002');

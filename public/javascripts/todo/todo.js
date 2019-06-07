@@ -6,7 +6,13 @@ $(document).ready(function () {
 
 
     $("#file-image-todo").change(function() {
-        console.log($(this).val());
+        var file = $(this)[0].files[0];
+        var upload = new Upload(file);
+        upload.doUpload(function(resultData){
+            console.log(resultData);
+            $("input[name=image]").val(resultData.data.image);
+        });
+
     });
 
 });
@@ -14,6 +20,29 @@ $(document).ready(function () {
 
 function ShowModal(name){
     $("#addModal").modal();
+}
+
+function ShowModalDel(_id){
+    console.log(_id);
+    modalConfirm(function(confirm){
+        if(confirm){
+          console.log('yes');
+          console.log(_id);
+
+          $.ajax({
+            url: '/todo/delete/'+_id,
+            type: 'GET',
+            data: {},
+            success: function (data) {
+                location.reload();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+        }else{
+        }
+      });
 }
 
 function Showdata() {

@@ -44,7 +44,13 @@
                                 <div class="text-center">
                                     <!-- <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
                                     <h6>Upload a different photo...</h6> -->
-                                    <input type="file" id="file-image-todo" onchange="changeImage()" class="form-control" name='image'>
+                                    <div id="progress-wrp">
+                                        <div class="progress-bar"></div>
+                                        <div class="status">0%</div>
+                                    </div>
+
+                                    <input type="hidden" name='image' value="">
+                                    <input type="file" id="file-image-todo" class="form-control" name='imageorigin'>
                                 </div>
                             </div>
 
@@ -68,4 +74,6 @@
         </div>
     </div>
 </div>
+
+
 

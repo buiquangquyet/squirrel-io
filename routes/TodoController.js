@@ -48,20 +48,20 @@ app.post('/save',function(req, res){
     //     return res.status(400).send('No files were uploaded.');
     // }
     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-    let sampleFile = req.files.image;
-    var crypto = require("crypto");
-    var random_name = crypto.randomBytes(10).toString('hex');
-    console.log('random_name' + random_name);
+    // let sampleFile = req.files.image;
+    // var crypto = require("crypto");
+    // var random_name = crypto.randomBytes(10).toString('hex');
+    // console.log('random_name' + random_name);
 
-    let pathnametoshow = '/media/' + random_name + '.jpg';
-    let pathnametoupload = 'public/media/' + random_name + '.jpg';
-    console.log('pathnametoupload' + pathnametoupload);
-    sampleFile.mv(pathnametoupload, function (err) {
-        if (err)
-            return res.status(500).send(err);
-        console.log('pathnametoshow:' + pathnametoshow);
-        //res.send('File uploaded! :' + name);
-    });
+    // let pathnametoshow = '/media/' + random_name + '.jpg';
+    // let pathnametoupload = 'public/media/' + random_name + '.jpg';
+    // console.log('pathnametoupload' + pathnametoupload);
+    // sampleFile.mv(pathnametoupload, function (err) {
+    //     if (err)
+    //         return res.status(500).send(err);
+    //     console.log('pathnametoshow:' + pathnametoshow);
+    //     //res.send('File uploaded! :' + name);
+    // });
     
 
     
@@ -71,7 +71,7 @@ app.post('/save',function(req, res){
         title: req.body.title,
         datetime: req.body.datetime,
         value: req.body.value_txt,
-        image: pathnametoshow,
+        image: req.body.image,
         create_time: new Date().toLocaleString()
     }
 
@@ -91,4 +91,18 @@ app.post('/save',function(req, res){
     return res.status(200).json(data);
 
 })
+
+app.get('/delete/:id',function(req,res,next){
+    var _id_delete=req.params.id;
+    console.log(_id_delete);
+    console.log(req.query.tagId);
+    Todos.deleteOne({ _id: _id_delete}, function (err) {
+        if (err) return handleError(err);
+        // deleted at most one tank document
+      });
+
+    return res.status(200).json(_id_delete);
+    
+});
+
 module.exports = app;
